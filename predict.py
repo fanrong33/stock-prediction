@@ -1,5 +1,7 @@
 # encoding: utf-8
-""" 
+""" 预测股票价格
+
+@version 1.0.2 build 20180613
 """
 
 from __future__ import print_function
@@ -13,8 +15,10 @@ import pandas as pd
 from sklearn.externals import joblib
 import matplotlib.pyplot as plt
 
-
 from models import RNN
+
+plt.rcParams['font.sans-serif'] = ['SimHei'] # 用来正常显示中文标签
+plt.rcParams['axes.unicode_minus'] = False # 用来正常显示负号
 
 
 parser = argparse.ArgumentParser(description='Pytorch Time Sequence Perdicton')
@@ -63,6 +67,8 @@ scaler = joblib.load('encoder/min_max_scaler.close.pkl')
           --inputs--
 '''
 test_dataset = train_dataset[-INPUT_SIZE:]
+
+
 pred_list = []
 for i in range(22):  # 预测未来22天的数据
     # Reshaping (batch, time_step, input_size)
@@ -91,7 +97,7 @@ plt.figure(1, figsize=(12, 5))
 # 绘制训练的股价
 plt.plot(scaler.inverse_transform(train_dataset), 'b-', label='train')
 
-# Getting the real stock price of feture test data
+# 绘制未来股价的真实价格
 test_dataset = pd.read_csv('data/000001.XSHE_test.csv')
 real_stock_price = test_dataset.iloc[:, 1:2].values
 plt.plot(np.arange(len(train_dataset), len(train_dataset)+len(real_stock_price)), real_stock_price.flatten(), 'g-', label='real')
@@ -100,6 +106,7 @@ plt.plot(np.arange(len(train_dataset), len(train_dataset)+len(real_stock_price))
 plt.plot(np.arange(len(train_dataset), len(train_dataset)+len(real_stock_price)), pred_list, 'r:', label='predict')
 
 plt.legend(loc='best')
+plt.title('平安银行')
 plt.show()
 
 

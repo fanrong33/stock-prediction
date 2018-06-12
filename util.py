@@ -1,4 +1,6 @@
 # encoding: utf-8
+""" 时序预测 工具函数
+"""
 
 import numpy as np
 
@@ -32,3 +34,5 @@ if __name__ == '__main__':
          [8]
          [9]]
     '''
+
+    

@@ -104,7 +104,7 @@ for epoch in range(args.epochs):
     plt.plot(scaler.inverse_transform(output.data.numpy()), 'r-', label='fit')
 
 
-    # Getting the real stock price of feture test data
+    # 打印未来数据的真实股票价格
     dataset_test = pd.read_csv('data/000001.XSHE_test.csv')
     real_stock_price = dataset_test.iloc[:, 1:2].values
     plt.plot(np.arange(len(train_y), len(train_y)+len(real_stock_price)), real_stock_price.flatten(), 'g-')
