@@ -4,7 +4,7 @@
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.externals import joblib
 
 
@@ -23,7 +23,7 @@ print(training_set)
 
 
 # Feature Scaling
-scaler = MinMaxScaler(feature_range = (0, 1))
+scaler = StandardScaler()
 training_set_scaled = scaler.fit_transform(training_set)
 print(training_set_scaled)
 
@@ -31,7 +31,7 @@ print(training_set_scaled)
 np.save('input/000001.XSHE_train', training_set_scaled)
 
 # 持久化encoder对象, 以便预测的时候使用
-joblib.dump(scaler, 'encoder/min_max_scaler.close.pkl')
+joblib.dump(scaler, 'encoder/standard_scaler.close.pkl')
 
 
 

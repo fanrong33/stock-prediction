@@ -28,6 +28,8 @@ parser.add_argument('--lr', type=float, default=0.01, metavar='LR', help='learni
 parser.add_argument('--output', default='saves/', help='folder to output images and model checkpoints')
 parser.add_argument('--epochs', type=int, default=8, metavar='EPOCHS', help='number of epochs to train (default: 8)')
 
+''' python train.py --epochs=500 --lr=0.005 '''
+
 args = parser.parse_args()
 CUDA = torch.cuda.is_available()
 
@@ -51,7 +53,7 @@ OUTPUT_SIZE = 1
 
 # 加载预处理过（正则化）的训练数据
 training_set_scaled = np.load('input/000001.XSHE_train.npy')
-scaler = joblib.load('encoder/min_max_scaler.close.pkl')
+scaler = joblib.load('encoder/standard_scaler.close.pkl')
 
 # Creating a data structure with 60 timesteps and 1 output
 train_X, train_y = util.create_dataset(training_set_scaled, input_size=INPUT_SIZE)

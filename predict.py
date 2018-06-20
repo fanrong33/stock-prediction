@@ -57,7 +57,7 @@ rnn.load_state_dict(rnn_state_dict)
 '''
 # 加载预处理过（正则化）的训练数据, 取最后的时间序列预测未来20几天
 train_dataset = np.load('input/000001.XSHE_train.npy')
-scaler = joblib.load('encoder/min_max_scaler.close.pkl')
+scaler = joblib.load('encoder/standard_scaler.close.pkl')
 
 # 循环预测接下来的数据
 ''' sample 示例
@@ -66,6 +66,7 @@ scaler = joblib.load('encoder/min_max_scaler.close.pkl')
          |          |
           --inputs--
 '''
+print(train_dataset.shape)
 test_dataset = train_dataset[-INPUT_SIZE:]
 
 
